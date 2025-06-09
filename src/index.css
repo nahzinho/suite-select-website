@@ -1,0 +1,135 @@
+@import "../styles/globals.css";
+
+@layer base {
+  :root {
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    /* SuiteSelect Gold Theme Variables */
+    --gold-primary: #ffd700;
+    --gold-secondary: #ffa500;
+    --gold-accent: #ff8c00;
+    --gold-light: #fff8dc;
+    --black-primary: #1a1a1a;
+    --black-secondary: #2d2d2d;
+    --white-cream: #fffef7;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(
+      135deg,
+      var(--black-primary) 0%,
+      var(--black-secondary) 100%
+    );
+    color: var(--white-cream);
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom SuiteSelect animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-accent) 0%,
+    var(--gold-primary) 50%,
+    var(--gold-accent) 100%
+  );
+  background-size: 200% 100%;
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+
+/* Gold gradient text utilities */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom button hover effects */
+.btn-gradient {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-accent));
+  color: var(--black-primary);
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(
+    135deg,
+    var(--gold-accent),
+    var(--gold-secondary)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+  color: var(--black-primary);
+}
+
+/* Gold accent elements */
+.gold-border {
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.luxury-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.luxury-card:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,2 @@
+- [ ] add support to german and english
+- [ ] adjust the logo
