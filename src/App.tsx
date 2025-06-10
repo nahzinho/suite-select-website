@@ -299,6 +299,7 @@ export function App() {
                   Contact Us
                 </span>
               </div>
+              PHONE NUMBER
               <a
                 href="mailto:jakob.petersdorff@suiteselect.de"
                 className="text-yellow-400 hover:text-yellow-300 text-xl font-medium break-all transition-colors"
