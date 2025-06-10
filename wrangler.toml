@@ -12,7 +12,7 @@ not_found_handling = "single-page-application"
 NODE_ENV = "production"
 
 # Custom domains (configure in Cloudflare dashboard)
-# routes = [
-#   { pattern = "suiteselect.com/*", zone_name = "suiteselect.com" },
-#   { pattern = "www.suiteselect.com/*", zone_name = "suiteselect.com" }
-# ]
+routes = [
+    { pattern = "suiteselect.com/*", zone_name = "suiteselect.com" },
+    { pattern = "www.suiteselect.com/*", zone_name = "suiteselect.com" }
+]

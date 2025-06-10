@@ -1,2 +1,3 @@
 - [ ] add support to german and english
 - [ ] adjust the logo
+- [ ] add phone +49 152 0491 1982
