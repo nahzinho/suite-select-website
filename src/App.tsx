@@ -1,10 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, CheckCircle, Star, Zap, Shield, Wrench } from "lucide-react";
+import {
+  Mail,
+  CheckCircle,
+  Star,
+  Zap,
+  Shield,
+  Wrench,
+  Globe,
+  Phone,
+} from "lucide-react";
+import { useState } from "react";
 import "./index.css";
 import logo from "./assets/suiteselect-logo.svg";
+import { translations, type Translations } from "./translations";
 
 export function App() {
+  const [language, setLanguage] = useState<"en" | "de">("en");
+  const t = translations[language];
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Header */}
@@ -12,7 +25,11 @@ export function App() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <img src={logo} alt="SuiteSelect Logo" className="w-32 h-16" />
+              <img
+                src={logo}
+                alt="SuiteSelect Logo"
+                className="w-40 h-20 object-contain"
+              />
               <div>
                 <h1 className="text-2xl font-bold gradient-text">
                   SuiteSelect
@@ -22,26 +39,41 @@ export function App() {
                 </p>
               </div>
             </div>
-            <nav className="hidden md:flex space-x-8">
-              <a
-                href="#benefits"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                Benefits
-              </a>
-              <a
-                href="#products"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                Products
-              </a>
-              <a
-                href="#contact"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                Contact
-              </a>
-            </nav>
+            <div className="flex items-center space-x-6">
+              <nav className="hidden md:flex space-x-8">
+                <a
+                  href="#benefits"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                >
+                  {t.nav.benefits}
+                </a>
+                <a
+                  href="#products"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                >
+                  {t.nav.products}
+                </a>
+                <a
+                  href="#contact"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                >
+                  {t.nav.contact}
+                </a>
+              </nav>
+
+              {/* Language Switcher */}
+              <div className="flex items-center space-x-2">
+                <Globe className="w-4 h-4 text-yellow-400" />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setLanguage(language === "en" ? "de" : "en")}
+                  className="text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/10 px-3 py-1 text-sm"
+                >
+                  {language === "en" ? "DE" : "EN"}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -51,18 +83,16 @@ export function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-transparent"></div>
         <div className="container mx-auto text-center relative z-10">
           <h2 className="text-6xl font-bold text-white mb-6 leading-tight">
-            Premium Vending Solutions with{" "}
+            {t.hero.title}{" "}
             <span className="gradient-text gold-shimmer">SuiteSelect</span>
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Attractive addition to your home's offerings without additional
-            effort or risk. Enhanced customer experience with AI-based vending
-            machines.
+            {t.hero.subtitle}
           </p>
           <div className="luxury-card rounded-lg p-6 mb-8 inline-block gold-border">
             <p className="text-yellow-400 font-medium flex items-center text-lg">
               <CheckCircle className="w-6 h-6 mr-3" />
-              We are accepting locations again!
+              {t.hero.announcement}
             </p>
           </div>
           <div>
@@ -75,7 +105,7 @@ export function App() {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              Contact Us Now
+              {t.hero.cta}
             </Button>
           </div>
         </div>
@@ -88,7 +118,7 @@ export function App() {
       >
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold text-center text-white mb-12 gradient-text">
-            What We Offer
+            {t.benefits.title}
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="luxury-card hover:luxury-card transition-all duration-300">
@@ -97,14 +127,12 @@ export function App() {
                   <Zap className="w-8 h-8 text-black" />
                 </div>
                 <CardTitle className="text-white text-center text-xl">
-                  No Additional Effort
+                  {t.benefits.noEffort.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-300 text-center leading-relaxed">
-                  Attractive addition to your home's offerings without
-                  additional effort or risk. We handle everything from
-                  installation to maintenance.
+                  {t.benefits.noEffort.description}
                 </p>
               </CardContent>
             </Card>
@@ -115,13 +143,12 @@ export function App() {
                   <Star className="w-8 h-8 text-black" />
                 </div>
                 <CardTitle className="text-white text-center text-xl">
-                  Enhanced Experience
+                  {t.benefits.enhanced.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-300 text-center leading-relaxed">
-                  Additional convenience – the customer experience with
-                  SuiteSelect is enhanced through our premium vending solutions.
+                  {t.benefits.enhanced.description}
                 </p>
               </CardContent>
             </Card>
@@ -132,13 +159,12 @@ export function App() {
                   <Shield className="w-8 h-8 text-black" />
                 </div>
                 <CardTitle className="text-white text-center text-xl">
-                  Your Choice
+                  {t.benefits.choice.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-300 text-center leading-relaxed">
-                  You decide: operator branding or the look of your home.
-                  Flexible branding options to match your aesthetic.
+                  {t.benefits.choice.description}
                 </p>
               </CardContent>
             </Card>
@@ -150,37 +176,23 @@ export function App() {
       <section id="products" className="py-16 bg-black/50">
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold text-center text-white mb-12 gradient-text">
-            Product Portfolio
+            {t.products.title}
           </h3>
           <div className="grid md:grid-cols-2 gap-12">
             <Card className="luxury-card">
               <CardHeader>
                 <CardTitle className="text-3xl gradient-text text-center">
-                  Snacks & Beverages
+                  {t.products.snacks.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4">
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Chocolate bars
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Nut and protein bars
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Fruit gums
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Soft drinks
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Premium water
-                  </li>
+                  {t.products.snacks.items.map((item, index) => (
+                    <li key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -188,31 +200,17 @@ export function App() {
             <Card className="luxury-card">
               <CardHeader>
                 <CardTitle className="text-3xl gradient-text text-center">
-                  Convenience Items
+                  {t.products.convenience.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4">
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Charging cables
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Hygiene products
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Menstruation products
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Household essentials
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
-                    Drugstore items
-                  </li>
+                  {t.products.convenience.items.map((item, index) => (
+                    <li key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="w-5 h-5 mr-3 text-yellow-400" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -224,7 +222,7 @@ export function App() {
       <section className="py-16 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold text-center text-white mb-12 gradient-text">
-            Our Guarantees
+            {t.guarantees.title}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center luxury-card p-6 rounded-lg">
@@ -232,10 +230,10 @@ export function App() {
                 <Star className="w-10 h-10 text-black" />
               </div>
               <h4 className="font-bold text-white mb-3 text-lg">
-                Premium Quality
+                {t.guarantees.premium.title}
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Visually appealing and high-quality AI-based vending machines
+                {t.guarantees.premium.description}
               </p>
             </div>
 
@@ -244,10 +242,10 @@ export function App() {
                 <CheckCircle className="w-10 h-10 text-black" />
               </div>
               <h4 className="font-bold text-white mb-3 text-lg">
-                Regular Restocking
+                {t.guarantees.restocking.title}
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Regularly restocked with in-demand items
+                {t.guarantees.restocking.description}
               </p>
             </div>
 
@@ -256,10 +254,10 @@ export function App() {
                 <Wrench className="w-10 h-10 text-black" />
               </div>
               <h4 className="font-bold text-white mb-3 text-lg">
-                Full Maintenance
+                {t.guarantees.maintenance.title}
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Guaranteed functionality and cleaning services
+                {t.guarantees.maintenance.description}
               </p>
             </div>
 
@@ -268,10 +266,10 @@ export function App() {
                 <Shield className="w-10 h-10 text-black" />
               </div>
               <h4 className="font-bold text-white mb-3 text-lg">
-                Agreement Compliance
+                {t.guarantees.compliance.title}
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                All agreements with home management are strictly adhered to
+                {t.guarantees.compliance.description}
               </p>
             </div>
           </div>
@@ -285,28 +283,46 @@ export function App() {
       >
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-4xl font-bold text-white mb-8 gradient-text">
-            Ready to Get Started?
+            {t.contact.title}
           </h3>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            We're accepting new locations! Contact us today to learn how
-            SuiteSelect can enhance your property's guest experience.
+            {t.contact.subtitle}
           </p>
-          <Card className="max-w-lg mx-auto luxury-card gold-border">
-            <CardContent className="pt-8 pb-8">
-              <div className="flex items-center justify-center mb-6">
-                <Mail className="w-10 h-10 text-yellow-400 mr-4" />
-                <span className="text-white font-semibold text-xl">
-                  Contact Us
-                </span>
-              </div>
-              <a
-                href="mailto:jakob.petersdorff@suiteselect.de"
-                className="text-yellow-400 hover:text-yellow-300 text-xl font-medium break-all transition-colors"
-              >
-                jakob.petersdorff@suiteselect.de
-              </a>
-            </CardContent>
-          </Card>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="luxury-card gold-border">
+              <CardContent className="pt-8 pb-8">
+                <div className="flex items-center justify-center mb-6">
+                  <Mail className="w-10 h-10 text-yellow-400 mr-4" />
+                  <span className="text-white font-semibold text-xl">
+                    {t.contact.contactUs}
+                  </span>
+                </div>
+                <a
+                  href="mailto:jakob.petersdorff@suiteselect.de"
+                  className="text-yellow-400 hover:text-yellow-300 text-lg font-medium break-all transition-colors"
+                >
+                  jakob.petersdorff@suiteselect.de
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="luxury-card gold-border">
+              <CardContent className="pt-8 pb-8">
+                <div className="flex items-center justify-center mb-6">
+                  <Phone className="w-10 h-10 text-yellow-400 mr-4" />
+                  <span className="text-white font-semibold text-xl">
+                    {t.contact.phone}
+                  </span>
+                </div>
+                <a
+                  href="tel:+4915204911982"
+                  className="text-yellow-400 hover:text-yellow-300 text-lg font-medium transition-colors"
+                >
+                  +49 152 0491 1982
+                </a>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
@@ -314,7 +330,11 @@ export function App() {
       <footer className="bg-black border-t border-yellow-400/20 py-12">
         <div className="container mx-auto px-6 text-center">
           <div className="flex items-center justify-center space-x-4 mb-6">
-            <img src={logo} alt="SuiteSelect Logo" className="w-12 h-12" />
+            <img
+              src={logo}
+              alt="SuiteSelect Logo"
+              className="w-16 h-16 object-contain"
+            />
             <div>
               <span className="text-2xl font-bold gradient-text">
                 SuiteSelect
@@ -324,9 +344,7 @@ export function App() {
               </p>
             </div>
           </div>
-          <p className="text-gray-400">
-            Premium vending solutions with SuiteSelect
-          </p>
+          <p className="text-gray-400">{t.footer.tagline}</p>
         </div>
       </footer>
     </div>
