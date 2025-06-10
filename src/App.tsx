@@ -10,14 +10,55 @@ import {
   Globe,
   Phone,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./index.css";
 import logo from "./assets/suiteselect-logo.svg";
 import { translations, type Translations } from "./translations";
 
 export function App() {
-  const [language, setLanguage] = useState<"en" | "de">("en");
+  // Function to detect browser language
+  const detectBrowserLanguage = (): "en" | "de" => {
+    const browserLang = navigator.language || navigator.languages?.[0] || "en";
+    // Check if the browser language starts with 'de' (for German)
+    return browserLang.toLowerCase().startsWith("de") ? "de" : "en";
+  };
+
+  // Function to get initial language (localStorage > browser > default)
+  const getInitialLanguage = (): "en" | "de" => {
+    try {
+      const savedLanguage = localStorage.getItem("suiteselect-language") as
+        | "en"
+        | "de"
+        | null;
+      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "de")) {
+        return savedLanguage;
+      }
+    } catch (error) {
+      console.warn("Could not access localStorage:", error);
+    }
+    return detectBrowserLanguage();
+  };
+
+  const [language, setLanguage] = useState<"en" | "de">(getInitialLanguage());
   const t = translations[language];
+
+  // Set initial language based on browser preference if no saved preference
+  useEffect(() => {
+    const initialLanguage = getInitialLanguage();
+    setLanguage(initialLanguage);
+  }, []);
+
+  // Save language preference to localStorage when it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem("suiteselect-language", language);
+    } catch (error) {
+      console.warn(
+        "Could not save language preference to localStorage:",
+        error
+      );
+    }
+  }, [language]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Header */}

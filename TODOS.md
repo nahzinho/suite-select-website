@@ -1,4 +1,4 @@
 - [x] add support to german and english
 - [x] adjust the logo
 - [x] add phone +49 152 0491 1982
-- [ ] detect language from browser
+- [x] detect language from browser
