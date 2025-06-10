@@ -1,6 +1,6 @@
 # SuiteSelect Website
 
-Premium vending solutions with THE CIRCUS LIVING - Information platform for property owners and managers.
+Premium vending solutions - Information platform for property owners and managers.
 
 ## Features
 
@@ -36,7 +36,7 @@ bun start
 SuiteSelect provides premium AI-based vending machines that enhance the guest experience in hotels and residential properties. We offer:
 
 - Attractive addition to your property without additional effort or risk
-- Enhanced customer experience with THE CIRCUS LIVING
+- Enhanced customer experience
 - Flexible branding options
 - Complete maintenance and restocking services
 - Wide range of snacks, beverages, and convenience items
